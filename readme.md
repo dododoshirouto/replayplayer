@@ -3,7 +3,7 @@
 ## ダウンロード方法
 
 1. [Latest Release](https://github.com/dododoshirouto/replayplayer/releases/latest)ページを開く
-1. ページ下部までスクロールし、**Assets**の中の**Source code (zip)**をクリックする
+1. ページ下部までスクロールし、**Assets**の中の`Source code (zip)`をクリックする
 1. 任意の場所にダウンロードしたzipファイルを解凍する
 
 ## 動画の開き方
