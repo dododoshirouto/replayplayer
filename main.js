@@ -253,7 +253,7 @@ checkVersionTags(
     function(data){
         versionInfo.innerHTML = `
         <p>$1</p>
-        <a href="https://github.com/dododoshirouto/replayplayer">更新があります。 $2</a>
+        <a href="https://github.com/dododoshirouto/replayplayer" target="_blank">更新があります。 $2</a>
         `.format(version, data[0].name);
     },
     function(data){

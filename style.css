@@ -3,7 +3,6 @@
     appearance: none;
     border: none;
     margin: 0;
-    cursor: none;
     overflow: hidden;
     will-change: none;
     image-rendering: crisp-edges;
@@ -12,7 +11,9 @@
 
 #inp_file {
     opacity: 0;
-    z-index: 99999999;
+    /* z-index: 99999999; */
+    z-index: 10;
+    cursor: none;
 }
 
 #inp_file[value] {
@@ -33,6 +34,7 @@
     height: 56.25vw;
     width: auto;
     /* pointer-events: none; */
+    cursor: none;
 }
 
 body {
@@ -84,9 +86,11 @@ label[for=is_loop] {
     opacity: 0.3;
 }
 
-#crop_info {
+#crop_info, #versionInfo, #versionInfo * {
     font-size: 1rem;
     padding-top: 0.5rem;
+    pointer-events: all !important;
+    z-index: 100;
 }
 
 /* body *:not(input):not(label):not(#ctrl) { */
