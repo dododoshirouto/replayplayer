@@ -240,17 +240,7 @@ function checkVersionTags(updatefunc = function(data){}, noupdatefunc = function
         url: 'https://api.github.com/repos/dododoshirouto/replayplayer/tags'
     })
     .done(function(d){
-        src_d = d;
-        data = [];
-        try {
-            data = JSON.parse(d);
-        }
-        catch(e) {
-            console.error('JSON parse error.');
-            console.error(d);
-            console.error(e);
-            return false;
-        }
+        data = d;
 
         if (data[0].name == version) {
             noupdatefunc(data);
