@@ -237,7 +237,7 @@ setInfoText();
 
 function checkVersionTags(updatefunc = function(data){}, noupdatefunc = function(data){}) {
     $.ajax({
-        url: 'https://api.github.com/repos/dododoshirouto/replayplayer/tags';
+        url: 'https://api.github.com/repos/dododoshirouto/replayplayer/tags'
     })
     .done(function(d){
         data = [];
