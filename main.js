@@ -1,4 +1,6 @@
-{/* <meta name="version" content="210919.1"></meta> */}
+version = document.querySelector('meta[name=version]').content;
+document.title += ' ver.' + version;
+
 
 videoId = 0;
 videos = [];
@@ -230,3 +232,40 @@ function setInfoText() {
     // crop_info.innerText = "left: $1 px , top: $2 px\nwidth: $3 px , height: $4 px".format(0, window.outerHeight - window.innerHeight, video.clientWidth, video.clientHeight);
 }
 setInfoText();
+
+
+
+function checkVersionTags(updatefunc = function(data){}, noupdatefunc = function(data){}) {
+    $.ajax({
+        url: 'https://api.github.com/repos/dododoshirouto/replayplayer/tags';
+    })
+    .done(function(d){
+        data = [];
+        try {
+            data = JSON.parse(d);
+        }
+        catch(e) {
+            console.error('JSON parse error.');
+            console.error(d);
+            console.error(e);
+            return false;
+        }
+
+        if (data[0].name == version) {
+            noupdatefunc(data);
+        } else {
+            updatefunc(data);
+        }
+    })
+}
+checkVersionTags(
+    function(data){
+        versionInfo.innerHTML = `
+        <p>$1</p>
+        <a href="https://github.com/dododoshirouto/replayplayer">更新があります。 $2</a>
+        `.format(version, data[0].name);
+    },
+    function(data){
+        versionInfo.innerHTML = "<p>$1</p>".format(version);
+    }
+);
