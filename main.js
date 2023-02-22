@@ -9,6 +9,10 @@ transition_time_s = 0.55;
 
 black.style.transition = 'opacity ' + transition_time_s * 1000 + 'ms ease-in-out';
 
+preloaded_video_num = 0;
+
+all_videos_duration = 0;
+
 inp_file.addEventListener('change', (ev) => {
     // ファイル読み込み時の動作
 
@@ -25,6 +29,23 @@ inp_file.addEventListener('change', (ev) => {
         videoEndTime = video.duration;
         setInfoText();
     }, 100);
+
+    let preload_html = '';
+    for (let video of videos) {
+        preload_html += '<video preload="metadata" src="' + window.URL.createObjectURL(video) + '"></video>';
+    }
+    video_preload.innerHTML = preload_html;
+    let pre_videos = document.querySelectorAll('#video_preload video');
+    for (let video of pre_videos) {
+        video.addEventListener('loadedmetadata', () => {
+            preloaded_video_num++;
+            if (preloaded_video_num == document.querySelectorAll('#video_preload video').length) {
+                for (let v of document.querySelectorAll('#video_preload video')) {
+                    all_videos_duration += v.duration;
+                }
+            }
+        });
+    }
 });
 
 window.addEventListener('keydown', (e) => {
@@ -250,6 +271,8 @@ function setInfoText() {
         screen.height - (window.screenTop + video.clientHeight + (window.outerHeight - window.innerHeight)) + (window.outerWidth - window.innerWidth) / 2
     );
     // crop_info.innerText = "left: $1 px , top: $2 px\nwidth: $3 px , height: $4 px".format(0, window.outerHeight - window.innerHeight, video.clientWidth, video.clientHeight);
+
+    all_duration.innerText = '$1:$2'.format(Math.floor(all_videos_duration / 60), ('0' + Math.floor(all_videos_duration % 60)).slice(-2));
 }
 setInfoText();
 
